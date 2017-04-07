@@ -82,7 +82,7 @@ class Scheduler(object):
         self.cpu = Cpu()
         self.accounting = SystemAccounting()
         self.semaphore = SemaphorePool(num_sems=5, count=1)
-        self.job_scheduling_queue = Fcfs()
+        self.job_scheduling_queue = Fifo()
 
 
     def new_process(self,job_info):
@@ -146,6 +146,8 @@ class Simulator(object):
         self.cpu = Cpu()
         self.accounting = SystemAccounting()
 
+        # This dictionary holds key->value pairs where the key is the "event" from the input
+        # file, and the value = the "function" to be called.
         # A = new process enters system             -> calls scheduler.new_process
         # D = Display status of simulator           -> calls display_status
         # I = Process currently on cpu performs I/O -> calls scheduler.perform_io 
